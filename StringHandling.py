@@ -1,4 +1,4 @@
-mystring = "Hello World!"
+﻿mystring = "Hello World!"
 
 # printing
 print mystring
@@ -38,3 +38,5 @@ print mystring+str(1)
 # string to int
 print int('1')
 
+# make array from strings
+print (mystring, mystring)
