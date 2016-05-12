@@ -28,7 +28,7 @@ print mystring.count('o')
 # replace
 print mystring.replace('o','u')
 
-# check if string contains string
+# check if string contains string (returns True or False)
 print 'lo' in mystring
 
 # join strings
