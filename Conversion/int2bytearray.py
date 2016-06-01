@@ -41,3 +41,10 @@ print v1
 # convert from little-endian bytearray to int
 v2 = bytes2int(b2, False)
 print v2
+
+
+# example output:
+# [128, 62, 0, 0]
+# [0, 0, 62, 128]
+# 16000
+# 16000
