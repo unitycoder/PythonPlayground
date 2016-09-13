@@ -18,3 +18,13 @@ with requests.session() as client:
     loggedinpage=client.post(URL,data=login_data)
 
     print loggedinpage.text
+    
+    # now can access sub pages with
+    URL = 'http://yourtarget.url/home'
+    headers = dict(referer = URL)
+    payload = {'somefield': 'benchman', '_csrf':csrftoken}
+    response = client.post(URL, data=payload, headers=headers)
+    
+    print response.text
+
+    
