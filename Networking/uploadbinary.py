@@ -5,11 +5,15 @@ import requests
 
 payload = {'foo': 'bar'} # for passing string fields also
 path = 'your/file.bin'
-
 url = 'http://localhost/upload.php'
-files = {'file': ('filenameifwanttogive.bin', open(path, 'rb'), 'application/octet-stream')}
+
+f=open(path, 'rb')
+files = {'file': ('filenameifwanttogive.bin', f, 'application/octet-stream')}
 
 # do actual request
 response = requests.post(url, files=files, data=payload)
+
+# close file handle
+f.close()
 
 print response.text
