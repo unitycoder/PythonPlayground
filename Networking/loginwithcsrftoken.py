@@ -7,22 +7,28 @@ from lxml import html
 URL = 'http://yourtarget.url/login'
 
 with requests.session() as client:
+    # first grab the initial csfr token from login page
     loginpage = client.get(URL)
-    
-    tree = html.fromstring(loginpage.text)
-    
+
     # parse hidden csrf field from login page (use view source to find its name first)
+    tree = html.fromstring(loginpage.text)
     csrftoken = list(set(tree.xpath("//input[@name='_csrf']/@value")))[0]
     
-    login_data = {'username':'redtruck','password':'420', 'csrfmiddlewaretoken':csrftoken}
-    loggedinpage=client.post(URL,data=login_data)
+    # do actual login form submission, note csrfmiddlewaretoken could have different names like "csrfmiddlewaretoken"
+    payload = {'username':'redtruck','password':'420', '_csrf':csrftoken}
+    loggedinpage=client.post(URL,data=payload)
 
-    print loggedinpage.text
+    # display logged in page
+    #print loggedinpage.text
     
-    # now can access sub pages with
+    # again parse hidden csrf field from login page, its different from initial _csfr
+    tree = html.fromstring(loggedinpage.text)
+    csrftoken = list(set(tree.xpath("//input[@name='_csrf']/@value")))[0]
+    
+    # now can access sub pages as you are logged in and have the logged in csfr token
     URL = 'http://yourtarget.url/home'
     headers = dict(referer = URL)
-    payload = {'somefield': 'benchman', '_csrf':csrftoken}
+    payload = {'something': 'benchman', '_csrf':csrftoken}
     response = client.post(URL, data=payload, headers=headers)
     
     print response.text
