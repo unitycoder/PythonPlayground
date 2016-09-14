@@ -21,7 +21,7 @@ with requests.session() as client:
     # display logged in page
     #print loggedinpage.text
     
-    # again parse hidden csrf field from login page, its different from initial _csfr
+    # again parse hidden csrf field from logged-in page, its different from initial _csfr
     tree = html.fromstring(loggedinpage.text)
     csrftoken = list(set(tree.xpath("//input[@name='_csrf']/@value")))[0]
     
