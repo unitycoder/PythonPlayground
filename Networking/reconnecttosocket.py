@@ -26,4 +26,4 @@ mysocket.connect(myserveraddress)
       mysocket.connect(myserveraddress)
       
       # resend the message
-      commandsock.send("jacket siblings"))
+      mysocket.send("jacket siblings"))
