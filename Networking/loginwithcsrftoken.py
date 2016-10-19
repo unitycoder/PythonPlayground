@@ -9,6 +9,8 @@ URL = 'http://yourtarget.url/login'
 with requests.session() as client:
     # first grab the initial csfr token from login page
     loginpage = client.get(URL)
+    # if you get SSL error (using self signed), then add verify=False
+    # loginpage = client.get('URL', verify=False)
 
     # parse hidden csrf field from login page (use view source to find its name first)
     tree = html.fromstring(loginpage.text)
