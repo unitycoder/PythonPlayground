@@ -1,6 +1,6 @@
 # calls  function with vars/params coming from dictionary
 
-# sample functions
+# sample function
 def mytest(amount=0,other=10):
     print "received=",amount,other
 
